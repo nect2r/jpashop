@@ -72,6 +72,23 @@ public class OrderSimpleApiController {
         return result;
     }
 
+    /**
+     * fetch join으로 query를 변경함
+     * 이로 인해서 N+1문제는 발생하지않으며 한번의 쿼리로 리스트를 출력할수있음
+     * 지연로딩으로 인한 성능문제를 쉽게 제거함
+     * @return
+     */
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> ordersV3() {
+        List<Order> orders = orderRepository.findAllWithMemberDelivery();
+
+        List<SimpleOrderDto> result = orders.stream()
+                .map(o -> new SimpleOrderDto(o))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
     @Data
     static class SimpleOrderDto {
         private Long orderId;
