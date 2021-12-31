@@ -6,6 +6,8 @@ import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import jpabook.jpashop.repository.order.query.OrderQueryDto;
+import jpabook.jpashop.repository.order.query.OrderQueryRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,7 @@ import java.util.stream.Collectors;
 public class OrderApiController {
 
     private final OrderRepository orderRepository;
+    private final OrderQueryRepository orderQueryRepository;
 
     /**
      * 엔티티를 직접반환
@@ -108,6 +111,21 @@ public class OrderApiController {
                 .collect(Collectors.toList());
 
         return collect;
+    }
+
+    /**
+     * JPA에서 DTO를 직접조회 할때
+     * xToOne 관계들을 먼저 조회하고 xToMany 관계는 각각 별도로 처리한다
+     * 이렇게 하지않으면 rows를 맞출 수 없음
+     * @param offset
+     * @param limit
+     * @return
+     */
+    @GetMapping("/api/4/orders")
+    public List<OrderQueryDto> ordersV4(
+            @RequestParam(value = "offset", defaultValue = "0") int offset,
+            @RequestParam(value = "limit", defaultValue = "100") int limit) {
+        return orderQueryRepository.findOrderQueryDtos();
     }
 
     @Data
