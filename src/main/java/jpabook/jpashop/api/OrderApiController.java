@@ -117,15 +117,16 @@ public class OrderApiController {
      * JPA에서 DTO를 직접조회 할때
      * xToOne 관계들을 먼저 조회하고 xToMany 관계는 각각 별도로 처리한다
      * 이렇게 하지않으면 rows를 맞출 수 없음
-     * @param offset
-     * @param limit
      * @return
      */
-    @GetMapping("/api/4/orders")
-    public List<OrderQueryDto> ordersV4(
-            @RequestParam(value = "offset", defaultValue = "0") int offset,
-            @RequestParam(value = "limit", defaultValue = "100") int limit) {
+    @GetMapping("/api/v4/orders")
+    public List<OrderQueryDto> ordersV4() {
         return orderQueryRepository.findOrderQueryDtos();
+    }
+
+    @GetMapping("/api/v5/orders")
+    public List<OrderQueryDto> ordersV5() {
+        return orderQueryRepository.findAllByDto_optimaization();
     }
 
     @Data
