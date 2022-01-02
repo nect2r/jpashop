@@ -13,6 +13,7 @@ spring:
 #        show_sql: true #system.out.println을 통해서 나오기떄문에 주석 운영에서는 사용X
         format_sql: true
         default_batch_fetch_size: 100
+    open-in-view: false
 
 logging:
   level:
