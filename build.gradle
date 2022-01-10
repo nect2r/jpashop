@@ -67,7 +67,7 @@ configurations {
 }
 
 bootJar {
-	mainClassName = 'com.jpabook.jpashop.JpashopApplication'
+	mainClassName = 'com.jpabook.JpashopApplication'
 }
 
 bootRun {
