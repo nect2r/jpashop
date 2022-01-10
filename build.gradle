@@ -65,12 +65,12 @@ compileQuerydsl {
 configurations {
 	querydsl.extendsFrom compileClasspath
 }
-
-bootJar {
-	mainClassName = 'com.jpabook.JpashopApplication'
-}
-
-bootRun {
-	String activeProfile = System.properties['spring.profiles.active']
-	systemProperties "spring.profiles.active", activeProfile
-}
+//
+//bootJar {
+//	MainClassName = 'jpabook.jpashop.JpashopApplication'
+//}
+//
+//bootRun {
+//	String activeProfile = System.properties['spring.profiles.active']
+//	systemProperties "spring.profiles.active", activeProfile
+//}
